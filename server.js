@@ -16,7 +16,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ── Connect to MongoDB ──
+// ── Connect to MongoDB (sirf ek baar) ──
 connectDB();
 
 // ── Routes ──
@@ -30,13 +30,12 @@ app.get("/", (req, res) => {
   res.send("YouTube Clone API is running...");
 });
 
-// ── Error handler (sabse end mein) ──
+// ── Error handler ──
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ message: "Something went wrong on the server" });
 });
 
+// ── Start server ──
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+app.listen(PORT, "0.0.0.0", () => console.log(`Server running on port ${PORT}`));
